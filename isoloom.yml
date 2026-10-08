@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://www.isoloom.com/schema/v1.json
+# Pikachu (by zhuifengshaonianhanlu) as an Isoloom spec: the upstream source, vendored unchanged
+# in build/web/app/, built by its Dockerfile (Apache, PHP and MySQL in one image, as upstream),
+# with the install step run as a docker.init job.
+# `isoloom generate`, then `isoloom up docker`.
+version: 1
+name: pikachu
+
+networks:
+  lab: { cidr: 10.60.14.0/24, internet: false }
+
+machines:
+  web:
+    networks: { lab: 10 }
+    services: [{ port: 80, name: web, http: true, publish: 80 }]
+    resources: { cpus: 1, memory_mb: 1024 }
+    docker:
+      build: build/web
+      init: [build/web/init.sh]
+
+checks:
+  - name: the home page answers
+    http: http://web/
+    wait: 180
+  - name: the XSS back end login page answers
+    http: http://web/pkxss/pkxss_login.php
+  - name: the installed database answers the SQL injection page
+    script: checks/sqli-string.sh
+
+message: |
+  Pikachu answers at http://localhost:{{ machines.web.services.0.publish }}/ (the interface is in
+  Chinese). The database is already installed; pick a vulnerability family in the left menu,
+  starting with brute force (暴力破解) or SQL injection (SQL-Inject).
