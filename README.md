@@ -15,7 +15,7 @@ step.
 
 ```bash
 isoloom generate
-isoloom up docker
+isoloom run docker
 ```
 
 Then open http://localhost/; the database is already installed. The XSS back end is at
