@@ -4,6 +4,5 @@
   "question": "Exploit each vulnerability family listed in the left menu.",
   "category": "WEB",
   "difficulty": 2,
-  "evidence_kind": "SECRET",
-  "capabilities": ["sql-injection", "cross-site-scripting", "remote-code-execution", "file-inclusion", "unrestricted-file-upload", "server-side-request-forgery"]
+  "evidence_kind": "SECRET"
 }
