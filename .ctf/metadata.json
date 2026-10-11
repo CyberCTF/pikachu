@@ -1,7 +1,7 @@
 {
   "title": "Pikachu",
   "description": "A deliberately vulnerable PHP and MySQL web application with a Chinese interface covering brute force, XSS (with an XSS back end), CSRF, SQL injection, RCE, file inclusion, unsafe upload and download, directory traversal, XXE, SSRF, unsafe deserialization and more, one page per variant.",
-  "question": "Exploit each vulnerability family listed in the left menu.",
+  "question": "Use the RCE section's ping page to run a command on the web server and read /ctf/flag.",
   "category": "WEB",
   "difficulty": 2,
   "evidence_kind": "SECRET"

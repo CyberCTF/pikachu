@@ -1,0 +1,35 @@
+{
+  "objectives": [
+    {
+      "key": "main",
+      "title": "Read the flag",
+      "prompt": "Use Pikachu's RCE section to run a command on the web server and read /ctf/flag.",
+      "check": { "evidence": "SECRET", "format": "FLAG{%s}" },
+      "dev": "FLAG{dev-pikachu}",
+      "hints": [
+        "The RCE entry of the left menu has a page that pings an address for you.",
+        "The address goes to a shell command as is: what happens to whatever follows a command separator?"
+      ],
+      "steps": [
+        {
+          "key": "page",
+          "title": "Find the page",
+          "prompt": "Which page of the RCE section runs a network tool with your input? (its file name)",
+          "check": { "answer": ["rce_ping.php", "rce_ping", "exec ping", "ping"] }
+        },
+        {
+          "key": "parameter",
+          "title": "Find the input",
+          "prompt": "Which form parameter carries the address to that command?",
+          "check": { "answer": ["ipaddress"] }
+        },
+        {
+          "key": "class",
+          "title": "Name the flaw",
+          "prompt": "Which vulnerability class lets your input run a command of your own on the server?",
+          "check": { "answer": ["command injection", "os command injection", "remote command execution", "rce"] }
+        }
+      ]
+    }
+  ]
+}

@@ -13,3 +13,4 @@ configMapGenerator:
     files:
       - build__web__init.sh=../../build/web/init.sh
       - checks__sqli-string.sh=../../checks/sqli-string.sh
+      - ctf__flag.sh=../../ctf/flag.sh
