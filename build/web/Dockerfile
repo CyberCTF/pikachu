@@ -1,8 +1,10 @@
-# Upstream's Dockerfile (app/Dockerfile) with two changes: the base image is pinned to the digest
-# its moving tag (latest-2004-php7) points to, and the source is copied from app/. The image runs
-# Apache, PHP and MySQL together, as upstream's does; init.sh (a docker.init job) then runs the
-# install pages that create the pikachu and pkxss databases.
-FROM mattrayner/lamp:latest-2004-php7@sha256:e42373f2a07956f1dd010b465f1a938854e133904b0bf4d3c26d17077e43f8ff
+# Upstream's Dockerfile (app/Dockerfile) with two changes: the base image is pinned by digest, and
+# the source is copied from app/. Upstream used the mattrayner/lamp:latest-2004-php7 tag, but that
+# tag is published for arm64 only, so an amd64 build (the lab's runner target) fails with
+# "exec format error"; this pins the amd64 release build of the same image (0.8.0-2004-php7). The
+# image runs Apache, PHP and MySQL together, as upstream's does; init.sh (a docker.init job) then
+# runs the install pages that create the pikachu and pkxss databases.
+FROM mattrayner/lamp:0.8.0-2004-php7@sha256:2312406ac8bc843359bfdc6aeb7da996d9bc68232bf59483301fe0d763ca3097
 LABEL maintainer="8023 - i@8023.moe"
 LABEL description="pikachu on php7 with expect @230613"
 COPY app/ /app/
